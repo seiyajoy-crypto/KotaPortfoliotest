@@ -3,7 +3,7 @@ export type NavItem = {
   href: string;
 };
 
-export type SocialIconName = "x" | "instagram" | "youtube" | "mail";
+export type SocialIconName = "x" | "mail";
 
 export type ProfileSection = {
   heading: string;
@@ -33,10 +33,13 @@ export const siteConfig = {
     { label: "Contact", href: "/contact" },
   ] satisfies NavItem[],
   socialLinks: [
-    { id: "x", label: "X", href: "#", icon: "x" },
-    { id: "instagram", label: "Instagram", href: "#", icon: "instagram" },
-    { id: "youtube", label: "YouTube", href: "#", icon: "youtube" },
-    { id: "mail", label: "Mail", href: "mailto:", icon: "mail" },
+    { id: "x", label: "X", href: "https://x.com/kota_2kx_", icon: "x" },
+    {
+      id: "mail",
+      label: "Mail",
+      href: "mailto:kota338kx@gmail.com",
+      icon: "mail",
+    },
   ] satisfies SocialLink[],
 
   // About ページ
@@ -80,12 +83,11 @@ export const siteConfig = {
       "A collection of short animation pieces: character motion, loops and music visuals. Scroll to expand the showreel, then browse the works below.",
   },
 
-  // Contact ページ（TODO: 連絡先は確定後に差し替え）
+  // Contact ページ
   contact: {
     heading: "Contact",
     lead: "Commissions, collaborations and general inquiries are welcome.",
-    email: "hello@example.com",
-    location: "Tokyo, Japan",
-    phone: "", // 空なら Phone ボックスは非表示
+    email: "kota338kx@gmail.com",
+    x: { handle: "@kota_2kx_", href: "https://x.com/kota_2kx_" },
   },
 };

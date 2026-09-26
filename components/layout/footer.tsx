@@ -24,7 +24,8 @@ export function Footer() {
           const Icon = socialIconMap[link.icon];
           return {
             link: link.href,
-            target: "_blank",
+            // mailto: は新しいタブを開かない
+            target: link.href.startsWith("http") ? "_blank" : undefined,
             label: link.label,
             Icon: <Icon size={22} />,
           };

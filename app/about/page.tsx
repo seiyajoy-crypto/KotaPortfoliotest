@@ -32,7 +32,8 @@ export default function AboutPage() {
             id: link.id,
             label: link.label,
             href: link.href,
-            target: "_blank",
+            // mailto: は新しいタブを開かない
+            target: link.href.startsWith("http") ? "_blank" : undefined,
             icon: link.icon,
           }))}
           actionButton={{ text: "Contact Me", href: "/contact" }}

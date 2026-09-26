@@ -1,22 +1,21 @@
 "use client";
 
 import * as React from "react";
-import { Check, Copy, type LucideIcon, Mail, MapPin, Phone } from "lucide-react";
+import { Check, Copy, Mail } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { socialIconMap } from "@/components/icons/social-icons";
+import { XIcon } from "@/components/icons/social-icons";
 import { siteConfig } from "@/lib/site-config";
 
 /**
  * 参照: Sorcepronpts/Contactpage.txt（ContactPage）
  * 変更点: 連絡先・SNS を lib/site-config.ts から読む、
  *         shadcn(base-ui) の Button に合わせて props 型を変更、
- *         Phone は site-config が空なら非表示
+ *         連絡手段は Email と X の 2 つだけにする（Location / Phone / SNS 一覧は削除）
  */
 export function ContactPage() {
-  const { contact, socialLinks } = siteConfig;
-  const hasPhone = contact.phone.trim().length > 0;
+  const { contact } = siteConfig;
 
   return (
     <div className="relative min-h-screen w-full">
@@ -41,85 +40,37 @@ export function ContactPage() {
           </p>
         </div>
         <BorderSeparator />
-        <div className={cn("grid", hasPhone ? "md:grid-cols-3" : "md:grid-cols-2")}>
+        <div className="grid md:grid-cols-2">
           <Box
-            icon={Mail}
+            icon={<Mail className="size-5 text-muted-foreground" strokeWidth={1} />}
             title="Email"
             description="I usually reply within a few days."
           >
             <a
               href={`mailto:${contact.email}`}
-              className="font-mono text-base font-medium tracking-wide hover:underline"
+              className="font-mono text-base font-medium tracking-wide break-all hover:underline"
             >
               {contact.email}
             </a>
             <CopyButton className="size-6" text={contact.email} />
           </Box>
           <Box
-            icon={MapPin}
-            title="Location"
-            description="Available for remote work worldwide."
-            className={cn(!hasPhone && "border-b-0 md:border-r-0")}
+            icon={<XIcon size={20} className="text-muted-foreground" strokeWidth={1} />}
+            title="X"
+            description="Updates and new works are posted here."
+            className="border-b-0 md:border-r-0"
           >
-            <span className="font-mono text-base font-medium tracking-wide">
-              {contact.location}
-            </span>
-          </Box>
-          {hasPhone && (
-            <Box
-              icon={Phone}
-              title="Phone"
-              description="Weekdays only."
-              className="border-b-0 md:border-r-0"
+            <a
+              href={contact.x.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-base font-medium tracking-wide hover:underline"
             >
-              <div className="flex items-center gap-x-2">
-                <a
-                  href={`tel:${contact.phone}`}
-                  className="block font-mono text-base font-medium tracking-wide hover:underline"
-                >
-                  {contact.phone}
-                </a>
-                <CopyButton className="size-6" text={contact.phone} />
-              </div>
-            </Box>
-          )}
+              {contact.x.handle}
+            </a>
+          </Box>
         </div>
         <BorderSeparator />
-        <div className="relative flex h-full min-h-[320px] items-center justify-center">
-          <div
-            className={cn(
-              "absolute inset-0 -z-10 size-full",
-              "bg-[radial-gradient(color-mix(in_oklab,var(--foreground)30%,transparent)_1px,transparent_1px)]",
-              "bg-[size:32px_32px]",
-              "[mask-image:radial-gradient(ellipse_at_center,var(--background)_30%,transparent)]",
-            )}
-          />
-
-          <div className="relative z-1 space-y-6 px-4">
-            <h2 className="text-center font-serif text-3xl italic md:text-4xl">
-              Find me online
-            </h2>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              {socialLinks.map((link) => {
-                const Icon = socialIconMap[link.icon];
-                return (
-                  <a
-                    key={link.id}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-x-2 rounded-full border bg-muted/50 px-4 py-2 hover:bg-accent"
-                  >
-                    <Icon size={16} className="size-4" />
-                    <span className="font-mono text-sm font-medium tracking-wide">
-                      {link.label}
-                    </span>
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
@@ -130,13 +81,12 @@ function BorderSeparator() {
 }
 
 type ContactBox = React.ComponentProps<"div"> & {
-  icon: LucideIcon;
+  icon: React.ReactNode;
   title: string;
   description: string;
 };
 
-function Box({ title, description, className, children, ...props }: ContactBox) {
-  const Icon = props.icon;
+function Box({ icon, title, description, className, children }: ContactBox) {
   return (
     <div
       className={cn(
@@ -145,7 +95,7 @@ function Box({ title, description, className, children, ...props }: ContactBox) 
       )}
     >
       <div className="flex items-center gap-x-3 border-b bg-muted/40 p-4">
-        <Icon className="size-5 text-muted-foreground" strokeWidth={1} />
+        {icon}
         <h2 className="font-heading text-lg font-medium tracking-wider">
           {title}
         </h2>
