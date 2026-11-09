@@ -22,7 +22,7 @@ export const siteConfig = {
   tagline: "Illustration & Animation", // TODO: Hero 用コピー
   heroCopy: {
     // TODO: 文言確定後に差し替え
-    sub: "Drawing worlds that move. Illustration and animation by Kota.",
+    sub: "動き出す世界を描く。Kota のイラストとアニメーション作品集です。",
     main: "Kota",
   },
   nav: [
@@ -70,23 +70,19 @@ export const siteConfig = {
   // Illustration ページ
   illustration: {
     title: "Illustration",
-    description:
-      "Selected illustration works. Tap any image to expand, drag vertically to dismiss.",
   },
 
   // Animation ページ（TODO: 動画素材・文言は確定後に差し替え）
   animation: {
     title: "Motion Works",
-    date: "Showreel 2026",
+    date: "Works",
     scrollToExpand: "Scroll to expand",
-    overview:
-      "A collection of short animation pieces: character motion, loops and music visuals. Scroll to expand the showreel, then browse the works below.",
   },
 
   // Contact ページ
   contact: {
     heading: "Contact",
-    lead: "Commissions, collaborations and general inquiries are welcome.",
+    lead: "お仕事のご依頼、コラボレーションのご相談、その他お問い合わせはお気軽にどうぞ。",
     email: "kota338kx@gmail.com",
     x: { handle: "@kota_2kx_", href: "https://x.com/kota_2kx_" },
   },

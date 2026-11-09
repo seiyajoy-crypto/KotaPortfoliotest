@@ -45,3 +45,4 @@ next-env.d.ts
 
 # 素材の元データ（Web 用は public/ に縮小版を配置済み）
 /テスト/
+/image/

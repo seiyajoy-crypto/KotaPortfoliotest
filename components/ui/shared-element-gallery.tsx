@@ -96,11 +96,14 @@ export function GalleryGrid({
  */
 export function GalleryImage({
   src,
+  thumbSrc,
   alt,
   id,
   className,
 }: {
   src: string;
+  /** グリッド表示用の縮小版（モーダルでは src を表示） */
+  thumbSrc?: string;
   alt?: string;
   id: string;
   className?: string;
@@ -120,7 +123,7 @@ export function GalleryImage({
     >
       <motion.img
         layoutId={`image-${id}`}
-        src={src}
+        src={thumbSrc ?? src}
         alt={alt || "Gallery Image"}
         loading="lazy"
         className="h-auto w-full rounded-xl object-cover"
@@ -189,7 +192,7 @@ function GalleryModal() {
             <motion.img
               layoutId={`image-${selectedImage.id}`}
               src={selectedImage.src}
-              alt={selectedImage.alt || "Selected gallery image"}
+              alt={selectedImage.alt || "拡大表示中のイラスト"}
               className="h-auto max-h-[90vh] w-auto max-w-[95vw] rounded-xl object-contain shadow-2xl will-change-transform"
               draggable={false} // Prevent native drag to allow motion drag
               transition={spring}
@@ -204,7 +207,7 @@ function GalleryModal() {
             transition={{ delay: 0.1, duration: 0.2 }}
             className="absolute top-6 right-6 z-50 rounded-full bg-white/10 p-2.5 text-white backdrop-blur-md transition-colors hover:bg-white/20"
             onClick={() => setSelectedImage(null)}
-            aria-label="Close gallery"
+            aria-label="ギャラリーを閉じる"
           >
             <X className="h-5 w-5" />
           </motion.button>

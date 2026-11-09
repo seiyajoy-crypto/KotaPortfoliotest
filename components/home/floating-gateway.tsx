@@ -47,7 +47,7 @@ export function FloatingGateway({
     <section
       ref={scope}
       className="relative flex h-[90vh] min-h-[600px] w-full items-center justify-center overflow-hidden"
-      aria-label="Illustration gateway"
+      aria-label="イラスト作品への入口"
     >
       <motion.div
         className="z-50 flex flex-col items-center space-y-5 text-center"

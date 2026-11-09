@@ -44,7 +44,7 @@ export function ContactPage() {
           <Box
             icon={<Mail className="size-5 text-muted-foreground" strokeWidth={1} />}
             title="Email"
-            description="I usually reply within a few days."
+            description="通常、数日以内にご返信いたします。"
           >
             <a
               href={`mailto:${contact.email}`}
@@ -57,7 +57,7 @@ export function ContactPage() {
           <Box
             icon={<XIcon size={20} className="text-muted-foreground" strokeWidth={1} />}
             title="X"
-            description="Updates and new works are posted here."
+            description="最新情報や新作はこちらで発信しています。"
             className="border-b-0 md:border-r-0"
           >
             <a
@@ -137,7 +137,7 @@ function CopyButton({
       size={size}
       className={cn("relative disabled:opacity-100", className)}
       onClick={handleCopy}
-      aria-label={copied ? "Copied" : "Copy to clipboard"}
+      aria-label={copied ? "コピーしました" : "クリップボードにコピー"}
       disabled={copied || props.disabled}
       {...props}
     >

@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 
-import {
-  Gallery,
-  GalleryGrid,
-  GalleryImage,
-} from "@/components/ui/shared-element-gallery";
-import { illustrationImages } from "@/lib/images";
+import { IllustrationGallery } from "@/components/illustration/illustration-gallery";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = { title: "Illustration" };
@@ -13,10 +8,10 @@ export const metadata: Metadata = { title: "Illustration" };
 /**
  * Illustration ページ
  * 参照: Sorcepronpts/illustraterpage.txt
- * 画像は lib/images.ts の illustrationImages から読む。
+ * 画像は lib/images.ts の illustrationImages から読む（カテゴリ別に絞り込み可）。
  */
 export default function IllustrationPage() {
-  const { title, description } = siteConfig.illustration;
+  const { title } = siteConfig.illustration;
 
   return (
     <div className="w-full min-h-screen self-start overflow-x-hidden">
@@ -28,23 +23,9 @@ export default function IllustrationPage() {
           <h1 className="font-serif text-5xl italic tracking-tight md:text-7xl">
             {title}
           </h1>
-          <p className="max-w-2xl text-lg text-muted-foreground md:text-xl">
-            {description}
-          </p>
         </header>
 
-        <Gallery>
-          <GalleryGrid>
-            {illustrationImages.map((image) => (
-              <GalleryImage
-                key={image.id}
-                id={image.id}
-                src={image.src}
-                alt={image.alt}
-              />
-            ))}
-          </GalleryGrid>
-        </Gallery>
+        <IllustrationGallery />
       </div>
     </div>
   );
