@@ -50,6 +50,8 @@ export type IllustrationImage = {
   thumb: string;
   alt: string;
   category: IllustrationCategory;
+  /** 作品名（お仕事イラストのみ。カードと拡大表示にキャプションとして出す） */
+  title?: string;
 };
 
 const toImages = (
@@ -65,8 +67,42 @@ const toImages = (
     category,
   }));
 
+// お仕事イラスト（元データ: 案件/ フォルダ。ファイル名をタイトルに使用）
+const worksTitles = [
+  "GCG「アスラン・ザラ」",
+  "GCG「アンドリュー・バルトフェルド」",
+  "GCG「ガルマ・ザビ」",
+  "GCG「シャリアブル」",
+  "GCG「パプテマス・シロッコ」",
+  "GCG「世界の歪み」",
+  "GCG「人の業」ショップバトルプロモ",
+  "GCG「知将のプライド」",
+  "GCG「頼れる兄貴分」",
+  "Ten.様「テオ」歌ってみた",
+  "ハンニャコッパ様「愛して愛して愛して」歌ってみた",
+  "ラスティカ様 ご依頼イラスト",
+  "夏ヶ瀬様「1/3の純情な感情」歌ってみた",
+  "春猿火様「BURN WRATH」歌ってみた",
+  "春猿火様「アウターサイエンス」歌ってみた",
+  "春猿火様「ヘッドフォンアクター」歌ってみた",
+  "春猿火様「ロスタイムメモリー」歌ってみた",
+  "黑天にゃぎ。様 ご依頼イラスト",
+];
+
+const worksImages: IllustrationImage[] = worksTitles.map((title, i) => {
+  const id = `c-${String(i + 1).padStart(2, "0")}`;
+  return {
+    id,
+    src: illust("works", id),
+    thumb: illustThumb("works", id),
+    alt: title,
+    category: "works",
+    title,
+  };
+});
+
 export const illustrationImages: IllustrationImage[] = [
-  ...toImages("works", "お仕事イラスト", range("w", 6)),
+  ...worksImages,
   ...toImages("original", "オリジナルイラスト", range("o", 13)),
   ...toImages("fanart", "ファンアート", range("f", 56)),
 ];

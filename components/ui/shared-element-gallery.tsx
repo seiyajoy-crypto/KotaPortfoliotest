@@ -16,6 +16,7 @@ interface ImageData {
   id: string;
   src: string;
   alt?: string;
+  title?: string;
 }
 
 interface GalleryContextType {
@@ -98,10 +99,13 @@ export function GalleryImage({
   src,
   thumbSrc,
   alt,
+  title,
   id,
   className,
 }: {
   src: string;
+  /** 作品名（拡大表示時のみキャプションとして表示） */
+  title?: string;
   /** グリッド表示用の縮小版（モーダルでは src を表示） */
   thumbSrc?: string;
   alt?: string;
@@ -119,7 +123,7 @@ export function GalleryImage({
         "relative mb-4 cursor-zoom-in overflow-hidden rounded-xl break-inside-avoid",
         className,
       )}
-      onClick={() => context.setSelectedImage({ id, src, alt })}
+      onClick={() => context.setSelectedImage({ id, src, alt, title })}
     >
       <motion.img
         layoutId={`image-${id}`}
@@ -198,6 +202,18 @@ function GalleryModal() {
               transition={spring}
             />
           </motion.div>
+
+          {selectedImage.title && (
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ delay: 0.1, duration: 0.2 }}
+              className="pointer-events-none absolute bottom-6 left-1/2 z-20 -translate-x-1/2 rounded-full bg-white/10 px-4 py-2 text-center text-sm text-white backdrop-blur-md"
+            >
+              {selectedImage.title}
+            </motion.p>
+          )}
 
           {/* Close Button */}
           <motion.button

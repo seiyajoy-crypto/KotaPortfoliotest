@@ -56,6 +56,7 @@ export function IllustrationGallery() {
               src={image.src}
               thumbSrc={image.thumb}
               alt={image.alt}
+              title={image.title}
             />
           ))}
         </GalleryGrid>
